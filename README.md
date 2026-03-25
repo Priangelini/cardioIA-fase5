@@ -68,15 +68,14 @@ No projeto, utilizamos:
 
 ## ⚙️ Arquitetura da Solução
 
-O sistema é composto por:
+O sistema foi desenvolvido utilizando uma arquitetura cliente-servidor para garantir escalabilidade e organização:
 
-🤖 Watson Assistant → responsável pelo fluxo conversacional
-💻 Frontend (chat) → interface de interação com o usuário
-🧠 Lógica de decisão → implementada nos Steps do Watson
+1.  **Frontend (HTML5/CSS3/JS):** Interface limpa onde o usuário interage com o chat.
+2.  **Backend (Python + Flask):** Servidor intermediário que gerencia as requisições, trata as chaves de API e faz a ponte com o serviço de nuvem.
+3.  **IBM Watson Assistant (NLP):** O motor de inteligência que processa a linguagem natural e decide o próximo passo da conversa.
 
-Fluxo geral:
-
-Usuário → Menu → Escolha de tema → Entrada de dados → Resposta → Retorno ao Menu 
+**Fluxo de Dados:**
+Usuário → Frontend → API Flask → IBM Watson SDK → Resposta do Bot → Frontend 
 
 ---
 
@@ -185,10 +184,18 @@ O assistente será carregado com todos os fluxos
 
 ## 🚀 Como Executar o Projeto
 
-1.  Importar o JSON no Watson (conforme instruções acima)
-2.  Configurar o ambiente do Watson Assistant
-3.  Integrar com frontend (se aplicável)
-4.  Iniciar interação via chat
+### Pré-requisitos
+* Python 3.x instalado.
+
+### Passo a Passo
+1.  **Configuração do Watson:** * Acesse o IBM Watson Assistant.
+    * Realize o upload do arquivo: `/watson/cardioia-assistant-action-v1.json`.
+2.  **Preparação do Backend:** * Navegue até a pasta: `cd backend`.
+    * Instale as bibliotecas necessárias usando o arquivo de requisitos:
+      `pip install -r requirements.txt`
+3.  **Configuração de Credenciais:** * No arquivo `app.py`, certifique-se de configurar suas chaves de API (API Key e Service URL) do Watson.
+4.  **Execução:** * Inicie o servidor: `python app.py`.
+5.  **Interação:** * Abra o arquivo `frontend/index.html` em seu navegador para iniciar o chat.
 
 ---
 
@@ -205,9 +212,20 @@ O assistente será carregado com todos os fluxos
 
 ---
 
-## 📁 Estrutura de pastas
+## 📁 Estrutura de Pastas
 
-
+```text
+/
+├── assets/             # Imagens e logos da documentação
+├── backend/            # Lógica do servidor em Python
+│   ├── app.py
+│   └── requirements.txt
+├── frontend/           # Interface do usuário
+│   └── index.html
+├── watson/             # Exportação da inteligência do assistente
+│   └── cardioia-assistant-action-v1.json
+├── .gitignore          # Arquivos ignorados pelo Git
+└── README.md
 ---
 
 ## 🗃 Histórico de lançamentos
@@ -237,6 +255,8 @@ A utilização do Watson Assistant permitiu:
 .  Projeto com fins educacionais
 .  Não substitui avaliação médica
 .  As orientações são informativas
+
+> **⚠️ Nota de Governança e Ética:** Este assistente foi projetado seguindo as boas práticas de saúde digital, incluindo um "Fluxo de Fallback" para situações de dúvida e o uso de "Disclaimers" obrigatórios, reforçando que o sistema é uma ferramenta de apoio informativo e nunca substitutivo ao diagnóstico médico profissional.
 
 ---
 
