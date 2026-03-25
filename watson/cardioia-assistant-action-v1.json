@@ -1,0 +1,2695 @@
+{
+  "name": "CardioIA Assistant-action",
+  "type": "action",
+  "counts": {
+    "actions": 11,
+    "intents": 8,
+    "entities": 9,
+    "data_types": 0,
+    "collections": 0,
+    "global_variables": 0
+  },
+  "status": "Available",
+  "language": "pt-br",
+  "skill_id": "54494430-d701-4b8a-bed6-6fdc14894c74",
+  "workspace": {
+    "actions": [
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Acho que não entendi. Reformule sua pergunta."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001",
+            "condition": {
+              "lte": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "fallback",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_002_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "gt": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            }
+          }
+        ],
+        "title": "No matches",
+        "action": "anything_else",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "anything_else"
+        },
+        "variables": [
+          {
+            "title": "Receio não entender o que você está perguntando, por favor, refo",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002_result_1",
+            "data_type": "any"
+          }
+        ],
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "danger_word_detected",
+            "type": "standard",
+            "title": "Connect to agent",
+            "handlers": [],
+            "resolver": {
+              "type": "fallback"
+            },
+            "variable": "danger_word_detected_variable",
+            "condition": {
+              "entity": "danger_words"
+            },
+            "next_step": "profanity_detected"
+          },
+          {
+            "step": "profanity_detected",
+            "type": "standard",
+            "title": "Show warning",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Use o idioma apropriado ao interagir com o assistente."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "max_hits",
+                "handler": "max_hits_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "max_hits": 2,
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "profanity_detected_variable",
+            "condition": {
+              "entity": "profane_words"
+            }
+          }
+        ],
+        "title": "Trigger word detected",
+        "action": "run_always",
+        "boosts": [],
+        "handlers": [],
+        "variables": [
+          {
+            "title": "Profanity detected",
+            "variable": "danger_word_detected_variable",
+            "data_type": "any"
+          },
+          {
+            "title": "Profane word detected",
+            "variable": "profanity_detected_variable",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "anything_else"
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Bem-vindo, como posso ajudá-lo?"
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001"
+          }
+        ],
+        "title": "Greet customer",
+        "action": "welcome",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "welcome"
+        },
+        "variables": [
+          {
+            "variable": "step_001",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_39967",
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_809",
+            "type": "standard",
+            "title": "Triagem inteligente (com botões)",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Entendi. Dor no peito pode ter várias causas, desde situações simples até condições que precisam de atenção imediata.\n\nAntes de continuar, me diga:\n\nEssa dor está acompanhada de algum destes sinais?\n\n\n  - falta de ar\n  - suor frio\n  - tontura ou desmaio\n  - dor que irradia para braço, costas ou mandíbula"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não tenho certeza",
+                      "value": {
+                        "input": {
+                          "text": "Não tenho certeza"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Eu não entendi. Selecione uma opção válida:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_21312",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_809",
+            "next_step": "step_611"
+          },
+          {
+            "step": "step_611",
+            "type": "standard",
+            "title": "Caso Grave",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Esses sinais podem indicar uma situação mais grave.\n\nDor no peito acompanhada desses sintomas pode estar relacionada a problemas cardíacos e exige atenção imediata.\n\nProcure atendimento médico agora ou vá até o pronto-socorro mais próximo."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_611",
+            "condition": {
+              "expression": "input.text == \"Sim\""
+            },
+            "next_step": "step_597"
+          },
+          {
+            "step": "step_597",
+            "type": "standard",
+            "title": "Caso Não Grave (por enquanto)",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Entendi. Mesmo sem sinais de alerta, é importante observar a dor.\n\nSe ela persistir, piorar ou aparecer com esforço físico, o ideal é buscar avaliação médica.\n\nFique atento caso surjam sintomas como falta de ar, tontura ou suor frio."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_597",
+            "condition": {
+              "expression": "input.text == \"Não\" || input.text == \"Não tenho certeza\""
+            },
+            "next_step": "step_216"
+          },
+          {
+            "step": "step_216",
+            "type": "standard",
+            "title": "Navegação",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Posso continuar te ajudando com outros temas cardiovasculares.\n\nEscolha uma opção abaixo:"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Pressão arterial",
+                      "value": {
+                        "input": {
+                          "text": "Pressão arterial"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Frequência cardíaca",
+                      "value": {
+                        "input": {
+                          "text": "Frequência cardíaca"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Encerrar",
+                      "value": {
+                        "input": {
+                          "text": "Encerrar"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Eu não entendi. Selecione uma opção válida:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_15718",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_216",
+            "next_step": "step_798"
+          },
+          {
+            "step": "step_798",
+            "type": "standard",
+            "title": "Pressão Arterial",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_9459",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_798_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_798",
+            "condition": {
+              "expression": "input.text == \"Pressão arterial\""
+            },
+            "next_step": "step_847"
+          },
+          {
+            "step": "step_847",
+            "type": "standard",
+            "title": "Frequência cardíaca",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_2110",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_847_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_847",
+            "condition": {
+              "expression": "input.text == \"Frequência cardíaca\""
+            },
+            "next_step": "step_421"
+          },
+          {
+            "step": "step_421",
+            "type": "standard",
+            "title": "Encerrar",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Certo. Espero ter ajudado.\n\nSe a dor no peito for intensa, persistente ou vier acompanhada de outros sintomas, procure atendimento médico imediatamente."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_421",
+            "condition": {
+              "expression": "input.text == \"Encerrar\""
+            }
+          }
+        ],
+        "title": "Dor no peito",
+        "action": "action_27544",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_27544_intent_8502"
+        },
+        "variables": [
+          {
+            "title": "Navegação",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_216",
+            "data_type": "any"
+          },
+          {
+            "title": "Encerrar",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_421",
+            "data_type": "any"
+          },
+          {
+            "title": "Caso Não Grave (por enquanto)",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_597",
+            "data_type": "any"
+          },
+          {
+            "title": "Caso Grave",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_611",
+            "data_type": "any"
+          },
+          {
+            "title": "Pressão Arterial",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_798",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_798_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Triagem inteligente (com botões)",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_809",
+            "data_type": "any"
+          },
+          {
+            "title": "Frequência cardíaca",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_847",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_847_result_1",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_25611",
+        "display_name": "Dor no peito",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_242",
+            "type": "standard",
+            "title": "Pergunta inicial",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Você está com dúvida sobre pressão arterial.\n\nSe você mediu sua pressão recentemente, pode me informar o valor? Exemplo: 120/80 ou 14 por 9."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_242",
+            "next_step": "step_959"
+          },
+          {
+            "step": "step_959",
+            "type": "standard",
+            "title": "Pressão Alta",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Esse valor pode indicar pressão arterial acima do ideal.\n\nLeituras como essa merecem atenção, especialmente se estiverem acompanhadas de sintomas como dor no peito, falta de ar, tontura, visão turva ou mal-estar.\n\nSe os sintomas forem importantes ou se a pressão estiver muito elevada, procure atendimento médico imediatamente.\n\nSe possível,"
+                          },
+                          {
+                            "scalar": " repita a medição em repouso e busque avaliação profissional."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_959",
+            "condition": {
+              "expression": "input.text.contains(\"14 por 9\") || input.text.contains(\"14/9\") || input.text.contains(\"14x9\") || input.text.contains(\"15 por 9\") || input.text.contains(\"15/9\") || input.text.contains(\"15x9\") || input.text.contains(\"15 por 10\") || input.text.contains(\"15/10\") || input.text.contains(\"15x10\") || input.text.contains(\"16 por 10\") || input.text.contains(\"16/10\") || input.text.contains(\"16x10\") || input.text.contains(\"17 por 10\") || input.text.contains(\"17/10\") || input.text.contains(\"17x10\") || input.text.contains(\"18 por 12\") || input.text.contains(\"18/12\") || input.text.contains(\"18x12\")"
+            },
+            "next_step": "step_768"
+          },
+          {
+            "step": "step_768",
+            "type": "standard",
+            "title": "Pressão baixa",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Esse valor pode indicar pressão arterial baixa.\n\nA pressão baixa pode causar tontura, fraqueza, visão escurecida ou até desmaio.\n\nSe você estiver com sintomas, sente-se ou deite-se e evite se levantar rapidamente.\n\nCaso os sintomas persistam ou piorem, procure atendimento médico."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_768",
+            "condition": {
+              "expression": "input.text.contains(\"9 por 6\") || input.text.contains(\"9/6\") || input.text.contains(\"9x6\") || input.text.contains(\"8 por 5\") || input.text.contains(\"8/5\") || input.text.contains(\"8x5\") || input.text.contains(\"9 por 5\") || input.text.contains(\"9/5\") || input.text.contains(\"9x5\")"
+            },
+            "next_step": "step_389"
+          },
+          {
+            "step": "step_389",
+            "type": "standard",
+            "title": "Pressão normal",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Esse valor está dentro de uma faixa considerada normal.\n\nUma pressão em torno de 120 por 80 é considerada adequada para a maioria das pessoas.\n\nMesmo assim, é importante manter hábitos saudáveis como alimentação equilibrada, atividade física e controle do estresse."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_389",
+            "condition": {
+              "expression": "input.text.contains(\"12 por 8\") || input.text.contains(\"12/8\") || input.text.contains(\"12x8\") || input.text.contains(\"11 por 7\") || input.text.contains(\"11/7\") || input.text.contains(\"11x7\") || input.text.contains(\"13 por 8\") || input.text.contains(\"13/8\") || input.text.contains(\"13x8\") || input.text.contains(\"120/80\")"
+            },
+            "next_step": "step_653"
+          },
+          {
+            "step": "step_653",
+            "type": "standard",
+            "title": "Valor não reconhecido",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Não consegui interpretar claramente o valor informado.\n\nSe quiser, tente enviar novamente no formato 120/80 ou 14 por 9.\n\nSe você estiver com sintomas como dor no peito, falta de ar, tontura forte ou desmaio, procure atendimento médico imediatamente."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_653",
+            "condition": {
+              "expression": "!(input.text.contains(\"14 por 9\") || input.text.contains(\"14/9\") || input.text.contains(\"14x9\") || input.text.contains(\"15 por 9\") || input.text.contains(\"15/9\") || input.text.contains(\"15x9\") || input.text.contains(\"15 por 10\") || input.text.contains(\"15/10\") || input.text.contains(\"15x10\") || input.text.contains(\"16 por 10\") || input.text.contains(\"16/10\") || input.text.contains(\"16x10\") || input.text.contains(\"17 por 10\") || input.text.contains(\"17/10\") || input.text.contains(\"17x10\") || input.text.contains(\"18 por 12\") || input.text.contains(\"18/12\") || input.text.contains(\"18x12\") || input.text.contains(\"9 por 6\") || input.text.contains(\"9/6\") || input.text.contains(\"9x6\") || input.text.contains(\"8 por 5\") || input.text.contains(\"8/5\") || input.text.contains(\"8x5\") || input.text.contains(\"9 por 5\") || input.text.contains(\"9/5\") || input.text.contains(\"9x5\") || input.text.contains(\"12 por 8\") || input.text.contains(\"12/8\") || input.text.contains(\"12x8\") || input.text.contains(\"11 por 7\") || input.text.contains(\"11/7\") || input.text.contains(\"11x7\") || input.text.contains(\"13 por 8\") || input.text.contains(\"13/8\") || input.text.contains(\"13x8\") || input.text.contains(\"120/80\")) && input.text != \"Dor no peito\" && input.text != \"Pressão arterial\" && input.text != \"Frequência cardíaca\" && input.text != \"Encerrar\""
+            },
+            "next_step": "step_263"
+          },
+          {
+            "step": "step_263",
+            "type": "standard",
+            "title": "Navegação",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Posso te ajudar com outros temas cardiovasculares.\n\nEscolha uma opção:"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Dor no peito",
+                      "value": {
+                        "input": {
+                          "text": "Dor no peito"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Frequência cardíaca",
+                      "value": {
+                        "input": {
+                          "text": "Frequência cardíaca"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Encerrar",
+                      "value": {
+                        "input": {
+                          "text": "Encerrar"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Eu não entendi. Selecione uma opção válida:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_32162",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_263",
+            "next_step": "step_125"
+          },
+          {
+            "step": "step_125",
+            "type": "standard",
+            "title": "Dor no peito",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_27544",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_125_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_125",
+            "condition": {
+              "expression": "input.text == \"Dor no peito\""
+            },
+            "next_step": "step_450"
+          },
+          {
+            "step": "step_450",
+            "type": "standard",
+            "title": "Frequência cardíaca",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_2110",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_450_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_450",
+            "condition": {
+              "expression": "input.text == \"Frequência cardíaca\""
+            },
+            "next_step": "step_641"
+          },
+          {
+            "step": "step_641",
+            "type": "standard",
+            "title": "Encerrar",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Certo. Espero ter ajudado.\n\nSe notar alterações frequentes na pressão ou sintomas importantes, procure avaliação médica."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_641",
+            "condition": {
+              "expression": "input.text == \"Encerrar\""
+            }
+          }
+        ],
+        "title": "Pressão arterial",
+        "action": "action_9459",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_9459_intent_42808"
+        },
+        "variables": [
+          {
+            "title": "Dor no peito",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_125",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_125_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Pergunta",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_242",
+            "data_type": "any"
+          },
+          {
+            "title": "Navegação",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_263",
+            "data_type": "any"
+          },
+          {
+            "title": "Pressão normal",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_389",
+            "data_type": "any"
+          },
+          {
+            "title": "Frequência cardíaca",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_450",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_450_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Encerrar",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_641",
+            "data_type": "any"
+          },
+          {
+            "title": "Valor não reconhecido",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_653",
+            "data_type": "any"
+          },
+          {
+            "title": "Pressão baixa",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_768",
+            "data_type": "any"
+          },
+          {
+            "title": "Pressão Alta",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_959",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_27544",
+        "display_name": "Pressão arterial",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_628",
+            "type": "standard",
+            "title": "Pergunta inicial",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Vamos verificar sua frequência cardíaca.\n\nInforme o valor em batimentos por minuto (bpm)?\n\nExemplo: 72, 95 ou 110."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Não consegui entender.\nPor favor, digite apenas um número (ex: 72)."
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-number",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_628",
+            "next_step": "step_624"
+          },
+          {
+            "step": "step_624",
+            "type": "standard",
+            "title": "Frequência alta",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Esse valor pode indicar frequência cardíaca acima do normal.\n\nEm repouso, valores acima de 100 bpm podem indicar taquicardia.\n\nIsso pode acontecer por estresse, ansiedade, febre ou esforço recente. Porém, se vier acompanhado de sintomas como falta de ar, tontura ou dor no peito, procure atendimento médico.\n\nSe possível, tente medir novamente em repouso."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_40387",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_624_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_624",
+            "condition": {
+              "gt": [
+                {
+                  "variable": "step_628"
+                },
+                {
+                  "scalar": "100"
+                }
+              ]
+            },
+            "next_step": "step_898"
+          },
+          {
+            "step": "step_898",
+            "type": "standard",
+            "title": "Frequência baixa",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Esse valor pode indicar frequência cardíaca mais baixa que o normal.\n\nEm algumas pessoas, especialmente atletas, isso pode ser normal. Porém, se estiver acompanhado de tontura, fraqueza ou desmaio, é importante procurar avaliação médica.\n\nEvite levantar rapidamente e observe os sintomas."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_40387",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_898_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_898",
+            "condition": {
+              "lt": [
+                {
+                  "variable": "step_628"
+                },
+                {
+                  "scalar": "60"
+                }
+              ]
+            },
+            "next_step": "step_426"
+          },
+          {
+            "step": "step_426",
+            "type": "standard",
+            "title": "Frequência normal",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Esse valor está dentro da faixa considerada normal para um adulto em repouso.\n\nMesmo assim, é importante observar como você está se sentindo. Se houver sintomas como dor no peito, tontura ou falta de ar, procure avaliação médica.\n\nSe estiver tudo bem, siga monitorando regularmente."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "context": {
+              "variables": []
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_40387",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_426_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_426",
+            "condition": {
+              "and": [
+                {
+                  "gte": [
+                    {
+                      "variable": "step_628"
+                    },
+                    {
+                      "scalar": "59"
+                    }
+                  ]
+                },
+                {
+                  "lte": [
+                    {
+                      "variable": "step_628"
+                    },
+                    {
+                      "scalar": "100"
+                    }
+                  ]
+                }
+              ]
+            },
+            "next_step": "step_132"
+          },
+          {
+            "step": "step_132",
+            "type": "standard",
+            "title": "Valor não reconhecido",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Não consegui entender o valor informado.\n\nPor favor, digite apenas um número inteiro, como por exemplo: 72\nVamos tentar novamente?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_40387",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_132_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_132",
+            "condition": {
+              "expression": "if $frequencia is null OR não é número"
+            }
+          }
+        ],
+        "title": "Frequência cardíaca",
+        "action": "action_2110",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_2110_intent_42560"
+        },
+        "variables": [
+          {
+            "title": "Valor não reconhecido",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_132",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_132_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Frequência normal",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_426",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_426_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Frequência alta",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_624",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_624_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Pergunta inicial",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_628",
+            "data_type": "number"
+          },
+          {
+            "title": "Frequência baixa",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_898",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_898_result_1",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_9459",
+        "display_name": "Frequência cardíaca",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_003",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Desculpe, não consegui entender sua mensagem.\n\nPosso te ajudar com informações sobre dor no peito, pressão arterial ou frequência cardíaca.\n\nPode me explicar melhor o que você está sentindo?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_003",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "No action matches"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Fallback",
+        "action": "fallback",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "fallback_connect_to_agent"
+        },
+        "variables": [
+          {
+            "title": "Desculpe, não consegui entender sua mensagem. Posso te ajudar co",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_003",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "run_always",
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_226",
+            "type": "standard",
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_226"
+          }
+        ],
+        "title": "não entendi",
+        "action": "action_24415",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_24415_intent_37588"
+        },
+        "variables": [
+          {
+            "title": "No response",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_226",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "fallback",
+        "display_name": "Fallback personalizado",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_352",
+            "type": "standard",
+            "title": "Saudação inicial",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Olá! Eu sou o CardioIA 🫀\n\nSou um assistente virtual de orientação inicial em saúde cardiovascular.\n\nNo momento, posso te ajudar com estes temas:\n\n\n  - dor no peito\n  - pressão arterial\n  - frequência cardíaca"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Escolha uma opção abaixo para continuar."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Dor no peito",
+                      "value": {
+                        "input": {
+                          "text": "Dor no peito"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Pressão arterial",
+                      "value": {
+                        "input": {
+                          "text": "Pressão arterial"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Frequência cardíaca",
+                      "value": {
+                        "input": {
+                          "text": "Frequência cardíaca"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Encerrar",
+                      "value": {
+                        "input": {
+                          "text": "Encerrar"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Eu não entendi. Selecione uma opção válida:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_30160",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_352",
+            "next_step": "step_103"
+          },
+          {
+            "step": "step_103",
+            "type": "standard",
+            "title": "Ir para Dor no peito",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_27544",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_103_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_103",
+            "condition": {
+              "expression": "input.text == \"Dor no peito\""
+            },
+            "next_step": "step_549"
+          },
+          {
+            "step": "step_549",
+            "type": "standard",
+            "title": "Ir para Pressão arterial",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_9459",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_549_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_549",
+            "condition": {
+              "expression": "input.text == \"Pressão arterial\""
+            },
+            "next_step": "step_472"
+          },
+          {
+            "step": "step_472",
+            "type": "standard",
+            "title": "Ir para  Frequência cardíaca",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_2110",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_472_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_472",
+            "condition": {
+              "expression": "input.text == \"Frequência cardíaca\""
+            },
+            "next_step": "step_606"
+          },
+          {
+            "step": "step_606",
+            "type": "standard",
+            "title": "Encerrar",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Certo. Espero ter ajudado.\n\nSe houver dor no peito intensa, falta de ar, tontura forte ou mal-estar importante, procure atendimento médico imediatamente."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_606",
+            "condition": {
+              "expression": "input.text == \"Encerrar\""
+            }
+          }
+        ],
+        "title": "Oi",
+        "action": "action_25611",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_25611_intent_10450"
+        },
+        "variables": [
+          {
+            "title": "Ir para Dor no peito",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_103",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_103_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Saudação inicial",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_352",
+            "data_type": "any"
+          },
+          {
+            "title": "Ir para Frequência cardíaca",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_472",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_472_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Ir para Pressão arterial",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_549",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_549_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Encerrar",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_606",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_24415",
+        "display_name": "Saudação inicial",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_298",
+            "type": "standard",
+            "title": "Menu",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Posso continuar te ajudando com outros temas cardiovasculares.\n\nEscolha uma opção abaixo:"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Dor no peito",
+                      "value": {
+                        "input": {
+                          "text": "Dor no peito"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Pressão arterial",
+                      "value": {
+                        "input": {
+                          "text": "Pressão arterial"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Frequência cardíaca",
+                      "value": {
+                        "input": {
+                          "text": "Frequência cardíaca"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Encerrar",
+                      "value": {
+                        "input": {
+                          "text": "Encerrar"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Eu não entendi. Selecione uma opção válida:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_36422",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_298",
+            "next_step": "step_211"
+          },
+          {
+            "step": "step_211",
+            "type": "standard",
+            "title": "Dor no peito",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_27544",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_211_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_211",
+            "condition": {
+              "expression": "input.text == \"Dor no peito\""
+            },
+            "next_step": "step_604"
+          },
+          {
+            "step": "step_604",
+            "type": "standard",
+            "title": "Pressão arterial",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_9459",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_604_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_604",
+            "condition": {
+              "expression": "input.text == \"Pressão arterial\""
+            },
+            "next_step": "step_750"
+          },
+          {
+            "step": "step_750",
+            "type": "standard",
+            "title": "Frequência cardíaca",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_2110",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_750_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_750",
+            "condition": {
+              "expression": "input.text == \"Frequência cardíaca\""
+            },
+            "next_step": "step_459"
+          },
+          {
+            "step": "step_459",
+            "type": "standard",
+            "title": "Encerrar",
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "action_39967",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_459_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_459",
+            "condition": {
+              "expression": "input.text == \"Encerrar\""
+            }
+          }
+        ],
+        "title": "Menu",
+        "action": "action_40387",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_40387_intent_23438"
+        },
+        "variables": [
+          {
+            "title": "Dor no peito",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_211",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_211_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Menu",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_298",
+            "data_type": "any"
+          },
+          {
+            "title": "Encerrar",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_459",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_459_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Pressão arterial",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_604",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_604_result_1",
+            "data_type": "any"
+          },
+          {
+            "title": "Frequência cardíaca",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_750",
+            "data_type": "any"
+          },
+          {
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_750_result_1",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_2110",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_466",
+            "type": "standard",
+            "title": "Encerrar",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Atendimento encerrado. \nSe precisar novamente, estarei por aqui."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_466"
+          }
+        ],
+        "title": "Encerrar",
+        "action": "action_39967",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_39967_intent_38259"
+        },
+        "variables": [
+          {
+            "title": "Encerrar",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_466",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_40387",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      }
+    ],
+    "intents": [
+      {
+        "intent": "action_24415_intent_37588",
+        "examples": [
+          {
+            "text": "qualquer coisa"
+          },
+          {
+            "text": "teste"
+          },
+          {
+            "text": "ajuda"
+          },
+          {
+            "text": "não entendi"
+          },
+          {
+            "text": "não sei"
+          },
+          {
+            "text": "??"
+          },
+          {
+            "text": "asdf"
+          }
+        ]
+      },
+      {
+        "intent": "action_25611_intent_10450",
+        "examples": [
+          {
+            "text": "olá assistente"
+          },
+          {
+            "text": "Oi"
+          },
+          {
+            "text": "Olá"
+          },
+          {
+            "text": "bom dia"
+          },
+          {
+            "text": "boa tarde"
+          },
+          {
+            "text": "Boa noite"
+          },
+          {
+            "text": "tudo bem"
+          }
+        ]
+      },
+      {
+        "intent": "action_27544_intent_8502",
+        "examples": [
+          {
+            "text": "dor no coração"
+          },
+          {
+            "text": "aperto no peito"
+          },
+          {
+            "text": "Dor no peito"
+          },
+          {
+            "text": "estou com dor no peito"
+          },
+          {
+            "text": "meu peito está doendo"
+          },
+          {
+            "text": "Sinto uma dor no peito"
+          },
+          {
+            "text": "pressão no peito"
+          }
+        ]
+      },
+      {
+        "intent": "action_40387_intent_23438",
+        "examples": [
+          {
+            "text": "Menu"
+          }
+        ]
+      },
+      {
+        "intent": "action_9459_intent_42808",
+        "examples": [
+          {
+            "text": "acho que minha pressão está muito alta"
+          },
+          {
+            "text": "Pressão arterial"
+          },
+          {
+            "text": "minha pressão está alta"
+          },
+          {
+            "text": "minha pressão deu 15 por 10"
+          },
+          {
+            "text": "estou com pressão alta"
+          },
+          {
+            "text": "pressão 16 por 10"
+          },
+          {
+            "text": "pressão arterial alta"
+          },
+          {
+            "text": "pressão alta"
+          },
+          {
+            "text": "pressão baixa"
+          },
+          {
+            "text": "Minha pressão está muito alta"
+          },
+          {
+            "text": "quero saber minha pressão"
+          }
+        ]
+      },
+      {
+        "intent": "action_2110_intent_42560",
+        "examples": [
+          {
+            "text": "meus batimentos estão altos"
+          },
+          {
+            "text": "taquicardia"
+          },
+          {
+            "text": "coração disparado"
+          },
+          {
+            "text": "frequência cardíaca alta"
+          },
+          {
+            "text": "Frequência cardíaca"
+          },
+          {
+            "text": "meu coração está acelerado"
+          },
+          {
+            "text": "estou com o coração acelerado"
+          },
+          {
+            "text": "batimento cardíaco alto"
+          }
+        ]
+      },
+      {
+        "intent": "fallback_connect_to_agent",
+        "examples": [
+          {
+            "text": "Eu quero contatar um agente/Eu quero entrar em contato com um agente"
+          },
+          {
+            "text": "Por favor, você pode entrar em contato comigo com um agente humano?"
+          },
+          {
+            "text": "Eu vou falar com um agente/ Eu vou falar com um agente de suporte."
+          },
+          {
+            "text": "Você pode me conectar com uma pessoa real?"
+          },
+          {
+            "text": "Preciso contatar a um atendente"
+          }
+        ],
+        "description": "Solicite um agente humano."
+      },
+      {
+        "intent": "action_39967_intent_38259",
+        "examples": [
+          {
+            "text": "Encerrar"
+          }
+        ]
+      }
+    ],
+    "entities": [
+      {
+        "entity": "entity_36422",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Dor no peito",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Encerrar",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Frequência cardíaca",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Pressão arterial",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "entity_30160",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Pressão arterial",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Frequência cardíaca",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Encerrar",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Dor no peito",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "sys-yes-no",
+        "values": []
+      },
+      {
+        "entity": "entity_32162",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Frequência cardíaca",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Encerrar",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Dor no peito",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "danger_words",
+        "values": [],
+        "fuzzy_match": false
+      },
+      {
+        "entity": "profane_words",
+        "values": [],
+        "fuzzy_match": false
+      },
+      {
+        "entity": "entity_21312",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Não tenho certeza",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Não",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Sim",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "entity_15718",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Encerrar",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Frequência cardíaca",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Pressão arterial",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "sys-number",
+        "values": []
+      }
+    ],
+    "metadata": {
+      "api_version": {
+        "major_version": "v2",
+        "minor_version": "2018-11-08"
+      },
+      "skill": {
+        "counts": {
+          "actions": 11,
+          "intents": 8,
+          "entities": 9,
+          "data_types": 0,
+          "collections": 0,
+          "global_variables": 0
+        }
+      }
+    },
+    "variables": [],
+    "data_types": [],
+    "collections": [],
+    "counterexamples": [],
+    "system_settings": {
+      "variable": {
+        "format": {
+          "time": {
+            "pattern": "short"
+          },
+          "currency": {
+            "fraction_digits": 2
+          }
+        }
+      },
+      "auto_learn": {
+        "apply": true
+      },
+      "topic_switch": {
+        "enabled": true,
+        "messages": {
+          "enable_confirmation": true,
+          "confirmation_failure": {
+            "generic": [
+              {
+                "values": [
+                  {
+                    "text_expression": {
+                      "concat": [
+                        {
+                          "scalar": "Desculpe, não entendi, confirme, por favor."
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "response_type": "text",
+                "selection_policy": "sequential"
+              }
+            ]
+          },
+          "confirmation_request": {
+            "generic": [
+              {
+                "values": [
+                  {
+                    "text_expression": {
+                      "concat": [
+                        {
+                          "scalar": "Deseja continuar com o tópico anterior: "
+                        },
+                        {
+                          "system_variable": "digressed_from"
+                        },
+                        {
+                          "scalar": "?"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "response_type": "text",
+                "selection_policy": "sequential"
+              },
+              {
+                "options": [
+                  {
+                    "label": "Sim",
+                    "value": {
+                      "input": {
+                        "text": "Sim"
+                      }
+                    }
+                  },
+                  {
+                    "label": "Não",
+                    "value": {
+                      "input": {
+                        "text": "Não"
+                      }
+                    }
+                  }
+                ],
+                "response_type": "option",
+                "repeat_on_reprompt": true
+              }
+            ]
+          }
+        },
+        "max_tries": 3
+      },
+      "disambiguation": {
+        "prompt": "Você quis dizer:",
+        "enabled": true,
+        "randomize": true,
+        "max_suggestions": 5,
+        "suggestion_text_policy": "title",
+        "none_of_the_above_prompt": "Nenhum dos itens acima",
+        "use_connect_to_support_prompt": "conectar ao suporte",
+        "single_answer_clarification_prompt": "Outra coisa"
+      },
+      "search_routing": {
+        "target": "conversational_search"
+      }
+    },
+    "learning_opt_out": false,
+    "language": "pt-br"
+  },
+  "description": "created for assistant 7595d07b-fbc9-4203-b1d2-ccd8669079a1",
+  "dialog_settings": {
+    "source_assistant": "77d50755-6f13-422f-93b8-61658d5c3d1a"
+  },
+  "created": "2026-03-25T02:12:48.919Z",
+  "updated": "2026-03-25T02:12:48.919Z",
+  "snapshot": "1",
+  "assistant_id": "7595d07b-fbc9-4203-b1d2-ccd8669079a1",
+  "assistant_references": []
+}
