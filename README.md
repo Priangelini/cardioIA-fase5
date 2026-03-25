@@ -160,23 +160,25 @@ O assistente será carregado com todos os fluxos
 
 ## 📸 Demonstração
 
-###Menu principal
+### Menu principal
+O ponto de partida do atendimento, apresentando as opções claras ao paciente para garantir uma navegação fluida.
 
+![Menu Principal do CardioIA](assets/2-menu.png)
 
+### Fluxo de Análise e Temas (Geral)
+Visualização de como o assistente processa a intenção do usuário e guia a conversa através dos fluxos definidos.
 
+![Visão Geral dos Fluxos de Ação](assets/1-actions.png)
 
-###Fluxo Frequência Cardíaca
+### Exemplo de Interação: Análise de Sintomas
+Demonstração de como o assistente reage a uma entrada de dados (como dor no peito ou valores informados) e fornece a orientação contextualizada.
 
+![Fluxo de Análise de Sintomas/Dados](assets/3-fluxo.png)
 
+### Exemplo de Conclusão de Atendimento
+Como o assistente encerra a conversa de forma educada e segura, após certificar-se de que o usuário não tem mais dúvidas.
 
-
-###Fluxo Pressão Arterial
-
-
-
-
-###Fluxo Encerramento
-
+![Fluxo de Encerramento e Despedida](assets/4-fluxo.png)
 
 
 ---
@@ -213,9 +215,6 @@ O assistente será carregado com todos os fluxos
 ---
 
 ## 📁 Estrutura de Pastas
-
-```text
-/
 ├── assets/             # Imagens e logos da documentação
 ├── backend/            # Lógica do servidor em Python
 │   ├── app.py
