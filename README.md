@@ -158,29 +158,42 @@ O assistente será carregado com todos os fluxos
 
 ---
 
-## 📸 Demonstração
+## 📸 Demonstração do Assistente
 
-### Menu principal
-O ponto de partida do atendimento, apresentando as opções claras ao paciente para garantir uma navegação fluida.
+Nesta seção, apresentamos o funcionamento do CardioIA através de capturas de tela do ambiente de testes da IBM e da estrutura de IA.
 
-![Menu Principal do CardioIA](assets/2-menu.png)
+### 1. Painel de Controle (IBM Watson Assistant)
+Abaixo, a estrutura modular do assistente. Note a organização das intenções principais (`Dor no peito`, `Pressão arterial`, `Frequência cardíaca`) e o tratamento de exceções com o fluxo de **Fallback personalizado** ("não entendi").
 
-### Fluxo de Análise e Temas (Geral)
-Visualização de como o assistente processa a intenção do usuário e guia a conversa através dos fluxos definidos.
+![Estrutura de Actions e Fallback no Watson](assets/1-actions.png)
 
-![Visão Geral dos Fluxos de Ação](assets/1-actions.png)
+---
 
-### Exemplo de Interação: Análise de Sintomas
-Demonstração de como o assistente reage a uma entrada de dados (como dor no peito ou valores informados) e fornece a orientação contextualizada.
+### 2. Fluxo de Boas-Vindas e Identificação
+A jornada do paciente inicia com uma recepção amigável. O sistema reconhece a entrada do usuário (ex: "ola") e aciona a saudação inicial para estabelecer o contexto do atendimento.
 
-![Fluxo de Análise de Sintomas/Dados](assets/3-fluxo.png)
+![Saudação inicial do sistema](assets/2-menu.png)
 
-### Exemplo de Conclusão de Atendimento
-Como o assistente encerra a conversa de forma educada e segura, após certificar-se de que o usuário não tem mais dúvidas.
+---
 
-![Fluxo de Encerramento e Despedida](assets/4-fluxo.png)
+### 3. Menu Interativo de Opções
+O assistente apresenta o escopo de atuação do CardioIA e oferece botões interativos para facilitar a navegação, garantindo que o usuário saiba exatamente como o assistente pode ajudá-lo.
 
+![Apresentação e Menu de Temas](assets/3-fluxo.png)
 
+---
+
+### 4. Coleta de Dados e Orientação (Ex: Frequência Cardíaca)
+Demonstração da inteligência do bot: ao receber um valor de bpm (65), o sistema classifica como "normal", fornece orientações preventivas e, seguindo boas práticas éticas, recomenda atenção a outros sintomas antes de retornar ao Menu.
+
+![Interação de coleta e análise de dados](assets/4-fluxo.png)
+
+---
+
+### 5. Finalização de Atendimento
+O fluxo de encerramento garante que o paciente tenha uma despedida clara e saiba que o canal permanece aberto para futuras dúvidas.
+
+![Encerramento do atendimento](assets/5-fluxo.png)
 ---
 
 
