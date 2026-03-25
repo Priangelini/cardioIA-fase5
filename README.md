@@ -228,6 +228,7 @@ O fluxo de encerramento garante que o paciente tenha uma despedida clara e saiba
 ---
 
 ## 📁 Estrutura de Pastas
+```text
 ├── assets/             # Imagens e logos da documentação
 ├── backend/            # Lógica do servidor em Python
 │   ├── app.py
@@ -238,6 +239,7 @@ O fluxo de encerramento garante que o paciente tenha uma despedida clara e saiba
 │   └── cardioia-assistant-action-v1.json
 ├── .gitignore          # Arquivos ignorados pelo Git
 └── README.md
+```
 ---
 
 ## 🗃 Histórico de lançamentos
