@@ -162,7 +162,7 @@ Após cada resposta, o usuário retorna ao Menu, garantindo um fluxo contínuo e
 ---
 
 ### 🔹 Estrutura no Watson
-![Estrutura Watson](./assets/1-ações.png)
+![Estrutura Watson](./assets/1-actions.png)
 
 ---
 
