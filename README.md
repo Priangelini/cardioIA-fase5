@@ -23,7 +23,7 @@
 
 ---
 
-#📌 Sobre o Projeto
+# 📌 Sobre o Projeto
 
 O CardioIA é um assistente virtual desenvolvido para simular um atendimento inicial na área de saúde cardiovascular.
 
@@ -119,21 +119,21 @@ Após cada resposta, o usuário retorna ao Menu, garantindo um fluxo contínuo e
 
 # ❤️ Funcionalidades
 
-###Frequência Cardíaca
+### Frequência Cardíaca
 - Entrada de bpm
 - Classificação automática
 - Orientação ao usuário
 
-###Pressão Arterial
+### Pressão Arterial
 - Avaliação dos valores
 - Classificação
 - Retorno ao menu
 
-###Dor no Peito
+### Dor no Peito
 - Orientações iniciais
 - Recomendação de avaliação médica
 
-###Encerrar
+### Encerrar
 - Exibe mensagem de despedida
 - Finalização da conversa
 
@@ -166,55 +166,55 @@ Após cada resposta, o usuário retorna ao Menu, garantindo um fluxo contínuo e
 
 ---
 
-#🧩 Tecnologias Utilizadas
+# 🧩 Tecnologias Utilizadas
 
 ## Frontend
 - HTML
 - CSS
 - JavaScript
   
-##Backend
+## Backend
 - Python
 - Flask
 
-##IA
+## IA
 - IBM Watson Assistant
   
-##Versionamento
+## Versionamento
 - GitHub
 
 ---
 
-#🚀 Como Executar o Projeto
+# 🚀 Como Executar o Projeto
 
-##🧠Backend
+## 🧠Backend
 
-###1. Acesse a pasta Backend
+### 1. Acesse a pasta Backend
 ```bash
 cd backend
 ```
-###2.  Instale as dependências:
+### 2.  Instale as dependências:
 ```bash
 pip install -r requirements.txt
 ```
-###3.  Execute o servidor:
+### 3.  Execute o servidor:
 ```bash
 python app.py
 ```
 
-##💻Frontend
+## 💻Frontend
 
-###1. Acesse a pasta do frontend:
+### 1. Acesse a pasta do frontend:
 ```bash
 cd frontend
 ```
 
-###2. Abra o arquivo:
+### 2. Abra o arquivo:
 ```bash
 frontend/index.html
 ```
 
-##🌐 Acesso
+## 🌐 Acesso
 
 Após iniciar:
 - Backend: http://localhost:5000
