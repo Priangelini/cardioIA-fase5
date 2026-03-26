@@ -145,22 +145,22 @@ Após cada resposta, o usuário retorna ao Menu, garantindo um fluxo contínuo e
 
 ### 🔹 Menu principal
 <p align="center">
-  <img src="./assets/2-menu.png" width="55%">
+  <img src="./assets/2-menu.png" width="50%">
 </p>
 
 ### 🔹 Fluxo Frequência Cardíaca
 <p align="center">
-  <img src="./assets/3-fluxo.png" width="55%">
+  <img src="./assets/3-fluxo.png" width="50%">
 </p>
 
 ### 🔹 Fluxo Pressão Arterial
 <p align="center">
-  <img src="./assets/4-fluxo.png" width="55%">
+  <img src="./assets/4-fluxo.png" width="50%">
 </p>
 
 ### 🔹 Fluxo Encerramento
 <p align="center">
-  <img src="./assets/5-fluxo.png" width="55%">
+  <img src="./assets/5-fluxo.png" width="50%">
 </p>
 
 ### 🔹 Estrutura no Watson
@@ -226,18 +226,25 @@ Após iniciar:
 
 ---
 
-## 🤖 Configuração do Watson Assistant
+## 🔐 Configuração do Watson Assistant
 
-O arquivo de exportação do assistente está disponível em:
+Para executar o projeto corretamente, é necessário configurar as credenciais do IBM Watson Assistant.
 
-/watson/cardioia_watson_assistant.json
+Crie um arquivo `.env` na pasta `backend` com as seguintes variáveis:
 
-📥 Como importar no Watson:
+```env
+WATSON_API_KEY=your_api_key_here
+WATSON_URL=your_service_url_here
+WATSON_ASSISTANT_ID=your_assistant_id_here
+```
 
-1.  Acesse o IBM Watson Assistant
-2.  Ir em Import
-3.  Selecione o arquivo JSON
-4.  Carregar assistant
+## 📌 Onde obter essas informações:
+
+1  Acesse o IBM Cloud
+2  Entre no serviço Watson Assistant
+3  Vá em:
+      Service credentials (para API Key e URL)
+      Assistant settings (para Assistant ID)
    
 ---
 
