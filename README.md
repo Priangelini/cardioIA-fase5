@@ -75,7 +75,9 @@ Responsável pela inteligência conversacional.
 
 # 🔄 Fluxo do Sistema
 
+```text
 Usuário → Frontend → Backend → Watson → Backend → Frontend → Usuário
+```
 
 ---
 
@@ -143,27 +145,27 @@ Após cada resposta, o usuário retorna ao Menu, garantindo um fluxo contínuo e
 
 ### 🔹 Menu principal
 <p align="center">
-  <img src="./assets/2-menu.png" width="70%">
+  <img src="./assets/2-menu.png" width="55%">
 </p>
 
 ### 🔹 Fluxo Frequência Cardíaca
 <p align="center">
-  <img src="./assets/3-fluxo.png" width="70%">
+  <img src="./assets/3-fluxo.png" width="55%">
 </p>
 
 ### 🔹 Fluxo Pressão Arterial
 <p align="center">
-  <img src="./assets/4-fluxo.png" width="70%">
+  <img src="./assets/4-fluxo.png" width="55%">
 </p>
 
 ### 🔹 Fluxo Encerramento
 <p align="center">
-  <img src="./assets/5-fluxo.png" width="70%">
+  <img src="./assets/5-fluxo.png" width="55%">
 </p>
 
 ### 🔹 Estrutura no Watson
 <p align="center">
-  <img src="./assets/1-actions.png" width="70%">
+  <img src="./assets/1-actions.png" width="55%">
 </p>
 
 ---
@@ -213,7 +215,7 @@ cd frontend
 
 ### 2. Abra o arquivo:
 ```bash
-frontend/index.html
+index.html
 ```
 
 ## 🌐 Acesso
@@ -239,7 +241,7 @@ O arquivo de exportação do assistente está disponível em:
    
 ---
 
-#🎥 Demonstração em Vídeo
+# 🎥 Demonstração em Vídeo
 
 [🔗 Clique aqui para assistir ao vídeo](         ) <br>
 
