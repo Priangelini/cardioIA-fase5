@@ -283,10 +283,11 @@ cardioIA-fase5/
 ---
 
 # 🗃 Histórico de lançamentos
-0.5.0 - Assistente Conversacional com Watson
-0.4.0 - Evolução do sistema
-0.3.0 - Integração de dados
-0.2.0 - Modelagem inicial
+
+* 0.5.0 - Assistente Conversacional com Watson
+* 0.4.0 - Evolução do sistema
+* 0.3.0 - Integração de dados
+* 0.2.0 - Modelagem inicial
 
 ---
 
