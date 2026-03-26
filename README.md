@@ -240,9 +240,9 @@ WATSON_ASSISTANT_ID=your_assistant_id_here
 
 ## 📌 Onde obter essas informações:
 
-1  Acesse o IBM Cloud
-2  Entre no serviço Watson Assistant
-3  Vá em:
+1. Acesse o IBM Cloud
+2. Entre no serviço Watson Assistant
+3. Vá em:
       Service credentials (para API Key e URL)
       Assistant settings (para Assistant ID)
    
