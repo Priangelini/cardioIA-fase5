@@ -249,8 +249,7 @@ WATSON_ASSISTANT_ID=your_assistant_id_here
 ---
 
 # 🎥 Demonstração em Vídeo
-
-[🔗 Clique aqui para assistir ao vídeo](         ) <br>
+[🔗 Clique aqui para assistir à demonstração no YouTube](https://youtu.be/vDNWg86eBbA)
 
 ---
 
@@ -260,7 +259,7 @@ WATSON_ASSISTANT_ID=your_assistant_id_here
 cardioIA-fase5/
 │
 ├── assets/
-│   ├── 1-ações.png
+│   ├── 1-actions.png
 │   ├── 2-menu.png
 │   ├── 3-fluxo.png
 │   ├── 4-fluxo.png
@@ -275,7 +274,7 @@ cardioIA-fase5/
 │   └── index.html
 │
 ├── watson/
-│   └── cardioia_watson_assistant.json
+│   └── cardioia-assistant-action-v1.json
 │
 └── README.md
 ```
@@ -303,11 +302,23 @@ A utilização do Watson Assistant permitiu:
 
 ---
 
+# 🛡️ Diferenciais de Governança e Resiliência
+
+Para atender aos requisitos de boas práticas e ética em saúde digital:
+
+- **Fallback Personalizado:** O nó "não entendi" evita que o sistema entre em estados de erro, reconduzindo o paciente ao menu principal.
+- **Triagem Condicional:** O sistema utiliza lógica booleana para identificar sinais de gravidade e priorizar orientações de emergência.
+- **Segurança de Credenciais:** Uso de variáveis de ambiente (`.env`) para proteção de chaves de API, conforme padrões de mercado.
+
+---
+
 # 📌 Observações
 
 - Projeto com fins educacionais
 - Não substitui avaliação médica
 - As orientações são informativas
+
+> **⚠️ Nota de Governança e Ética:** Este assistente foi projetado seguindo as boas práticas de saúde digital, incluindo um "Fluxo de Fallback" para situações de dúvida e o uso de "Disclaimers" obrigatórios, reforçando que o sistema é uma ferramenta de apoio informativo e nunca substitutivo ao diagnóstico médico profissional.
 
 ---
 
