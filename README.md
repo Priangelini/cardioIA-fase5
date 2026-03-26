@@ -142,27 +142,29 @@ Após cada resposta, o usuário retorna ao Menu, garantindo um fluxo contínuo e
 ## 📸 Demonstração
 
 ### 🔹 Menu principal
-![Menu principal](./assets/2-menu.png)
-
----
+<p align="center">
+  <img src="./assets/2-menu.png" width="70%">
+</p>
 
 ### 🔹 Fluxo Frequência Cardíaca
-![Fluxo frequência cardíaca](./assets/3-fluxo.png)
-
----
+<p align="center">
+  <img src="./assets/3-fluxo.png" width="70%">
+</p>
 
 ### 🔹 Fluxo Pressão Arterial
-![Fluxo pressão arterial](./assets/4-fluxo.png)
-
----
+<p align="center">
+  <img src="./assets/4-fluxo.png" width="70%">
+</p>
 
 ### 🔹 Fluxo Encerramento
-![Fluxo encerramento](./assets/5-fluxo.png)
-
----
+<p align="center">
+  <img src="./assets/5-fluxo.png" width="70%">
+</p>
 
 ### 🔹 Estrutura no Watson
-![Estrutura Watson](./assets/1-actions.png)
+<p align="center">
+  <img src="./assets/1-actions.png" width="70%">
+</p>
 
 ---
 
